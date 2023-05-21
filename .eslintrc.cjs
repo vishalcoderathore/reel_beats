@@ -1,51 +1,49 @@
 module.exports = {
   env: {
-    browser: true,
-    es2021: true,
-    node: true,
+    browser: true, // This project runs in a browser environment
+    es2021: true, // This project uses ECMAScript 2021 syntax
+    node: true, // This project runs in a Node.js environment
   },
   extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
-    'plugin:prettier/recommended',
+    'eslint:recommended', // Use the recommended ESLint rules
+    'plugin:@typescript-eslint/recommended', // Use recommended rules from the TypeScript plugin
+    'plugin:import/recommended', // Use recommended rules for ES6+ import/export syntax
+    'plugin:import/typescript', // Use TypeScript rules for ES6+ import/export syntax
+    'plugin:jsx-a11y/recommended', // Use recommended rules for accessible JSX
+    'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors
+    'plugin:react-hooks/recommended', // Rules of Hooks and exhaustive deps
+    'plugin:react/recommended', // Use recommended rules for React
+    'prettier', // Turns off all rules that are unnecessary or might conflict with Prettier
   ],
-  parser: '@typescript-eslint/parser',
+  parser: '@typescript-eslint/parser', // Specifies the ESLint parser for TypeScript
   parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: 'module',
     ecmaFeatures: {
-      jsx: true,
+      jsx: true, // Enable JSX syntax
     },
-    project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
+    ecmaVersion: 2021, // Use ECMAScript 2021 syntax
+    project: './tsconfig.json', // Specify the TypeScript configuration file
+    sourceType: 'module', // Treat code as ECMAScript modules
+    tsconfigRootDir: __dirname, // Specify the root directory for the TypeScript configuration
   },
-  plugins: ['@typescript-eslint', 'prettier', 'react', 'react-hooks', 'import'],
+  plugins: ['@typescript-eslint', 'import', 'prettier', 'react', 'react-hooks'],
   rules: {
-    // These rules enforce that functions have explicit return types, which can make the code more self-documenting and catch potential bugs. However, some teams find these rules overly strict, especially in a codebase that uses a lot of type inference, and choose to disable them.
-    '@typescript-eslint/explicit-function-return-type': 'error',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/triple-slash-reference': 'off',
-    'prettier/prettier': 'error',
-    'react/jsx-uses-react': 'off',
-    'react/jsx-uses-vars': 'error',
-    // This rule requires that React component props be typed, which can help catch bugs and make the code more self-documenting. However, if you're using TypeScript, which has its own system for typing props, this rule might be redundant.
-    'react/prop-types': 'off',
-    // This rule is usually necessary for older versions of React, but starting with React 17, JSX Transform has been introduced and you no longer need to import React in your component files, so disabling this rule makes sense for recent projects.
-    'react/react-in-jsx-scope': 'off',
-    'import/default': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error', // Require explicit return types on functions and class methods
+    '@typescript-eslint/explicit-module-boundary-types': 'off', // No need to always enforce explicit module boundary types
+    '@typescript-eslint/no-unused-vars': 'warn', // Warn on variables defined but never used
+    '@typescript-eslint/triple-slash-reference': 'off', // Don't use /// <reference>
+    'import/default': 'off', // Allow import of default exports even when not present
+    'prettier/prettier': 'error', // Mark prettier formatting issues as errors
+    'react/jsx-uses-react': 'off', // Not necessary with the new JSX Transform introduced in React 17
+    'react/jsx-uses-vars': 'error', // Prevent variables used in JSX to be marked as unused
+    'react/prop-types': 'off', // Disable prop-types enforcement in favor of TypeScript types/interfaces
+    'react/react-in-jsx-scope': 'off', // Not necessary with the new JSX Transform introduced in React 17
   },
   settings: {
-    react: {
-      version: 'detect',
-    },
     'import/resolver': {
-      typescript: {},
+      typescript: {}, // Use TypeScript for module resolution
+    },
+    react: {
+      version: 'detect', // Automatically detect the version of React
     },
   },
 };
