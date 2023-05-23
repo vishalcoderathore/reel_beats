@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import 'bulma/css/bulma.css';
 import App from './App.tsx';
 import React from 'react';
 import './index.css';
@@ -6,5 +7,5 @@ import './index.css';
 createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
