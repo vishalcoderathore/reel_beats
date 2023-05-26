@@ -1,6 +1,4 @@
-import { createRandomMovie, Media } from '../data/main';
-
-type Movie = Media;
+import { createRandomMovie, Movie } from '../data';
 
 function MoviePlaylist(): JSX.Element {
   const moviePlaylist: Movie[] = [];

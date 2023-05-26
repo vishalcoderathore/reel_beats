@@ -1,13 +1,26 @@
-import { createRandomSong, Media } from '../data/main';
-
-type Song = Media;
+import { createRandomSong, Media, Song } from '../data';
+import { useDispatch, useSelector } from 'react-redux';
+import { addSong } from '../store';
 
 function SongPlaylist(): JSX.Element {
-  const songPlaylist: Media[] = [];
+  const dispatch = useDispatch();
+
+  const songPlaylist: Song[] = useSelector((store: { songs: Song[] }): Song[] => {
+    return store.songs;
+  });
 
   const handleSongAdd = (song: Song): void => {
-    // To Do:
-    // Add song to list of songs
+    /* Action Object
+    {
+      payload : {
+        id: string,
+        title: string
+      },
+      type: "song/addSong"
+    }
+    */
+    // Need to dispatch action object
+    dispatch(addSong(song));
   };
 
   const handleSongRemove = (song: Song): void => {

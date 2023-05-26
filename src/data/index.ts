@@ -9,6 +9,9 @@ export interface Media {
   title: string;
 }
 
+export type Song = Media;
+export type Movie = Media;
+
 export const createRandomMovie = (): Media => {
   return {
     id: faker.string.uuid(),
