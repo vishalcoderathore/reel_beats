@@ -1,8 +1,8 @@
 import MoviePlaylist from './components/MoviePlaylist';
 import SongPlaylist from './components/SongPlaylist';
 import { useDispatch } from 'react-redux';
+import { reset } from './store/action';
 import { ReactElement } from 'react';
-import { reset } from './store';
 import './App.css';
 
 function App(): ReactElement {
