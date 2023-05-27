@@ -1,5 +1,8 @@
-import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Song, Movie } from '../data';
+import { configureStore, createSlice, PayloadAction, createAction } from '@reduxjs/toolkit';
+import { Movie, Song } from '../data';
+
+// Reset is a common action type observed by both the Movie and Song slices
+export const reset = createAction('app/reset');
 
 /*
 SLICES
@@ -25,16 +28,52 @@ const songsSlice = createSlice({
       state.push(action.payload);
     },
     removeSong(state, action: PayloadAction<Song>) {
-      // Reducer for removing a song from the state
-      // Implement the logic to remove a song
+      const songId = action.payload.id;
+      const index = state.findIndex(song => song.id === songId);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
     },
+    resetSong() {
+      return [];
+    },
+  },
+  extraReducers(builder) {
+    builder.addCase(reset, () => {
+      return [];
+    });
+  },
+});
+
+// Create a slice for movies
+const moviesSlice = createSlice({
+  name: 'movie',
+  initialState: [] as Movie[], // Initial state as an empty array of Song objects
+  reducers: {
+    addMovie(state, action: PayloadAction<Movie>) {
+      // Reducer for adding a song to the state
+      state.push(action.payload);
+    },
+    removeMovie(state, action: PayloadAction<Movie>) {
+      const movieId = action.payload.id;
+      const index = state.findIndex(movie => movie.id === movieId);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+    },
+  },
+  extraReducers(builder) {
+    builder.addCase(reset, () => {
+      return [];
+    });
   },
 });
 
 // Configure the Redux store
 const store = configureStore({
   reducer: {
-    songs: songsSlice.reducer, // Mega reducer function wrapping up smaller reducers like addSong, removeSong
+    songs: songsSlice.reducer, // Combined reducer function wrapping up smaller reducers like addSong, removeSong
+    movies: moviesSlice.reducer,
   },
 });
 
@@ -43,3 +82,4 @@ export { store };
 
 // Export the action creator
 export const { addSong, removeSong } = songsSlice.actions;
+export const { addMovie, removeMovie } = moviesSlice.actions;

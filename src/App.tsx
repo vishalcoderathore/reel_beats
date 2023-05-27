@@ -1,12 +1,15 @@
 import MoviePlaylist from './components/MoviePlaylist';
 import SongPlaylist from './components/SongPlaylist';
-import { ReactElement, useState } from 'react';
-import reactLogo from './assets/react.svg';
+import { useDispatch } from 'react-redux';
+import { ReactElement } from 'react';
+import { reset } from './store';
 import './App.css';
 
 function App(): ReactElement {
+  const dispatch = useDispatch();
+
   const handleResetClick = (): void => {
-    //
+    dispatch(reset());
   };
 
   return (

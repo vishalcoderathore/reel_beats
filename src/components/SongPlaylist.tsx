@@ -1,6 +1,6 @@
-import { createRandomSong, Media, Song } from '../data';
 import { useDispatch, useSelector } from 'react-redux';
-import { addSong } from '../store';
+import { createRandomSong, Song } from '../data';
+import { addSong, removeSong } from '../store';
 
 function SongPlaylist(): JSX.Element {
   const dispatch = useDispatch();
@@ -24,8 +24,7 @@ function SongPlaylist(): JSX.Element {
   };
 
   const handleSongRemove = (song: Song): void => {
-    // To Do:
-    // Remove song from list of songs
+    dispatch(removeSong(song));
   };
 
   const renderedSongs = songPlaylist.map((song: Song) => {
@@ -43,6 +42,7 @@ function SongPlaylist(): JSX.Element {
     <div className="content">
       <div className="table-header">
         <h3 className="subtitle is-3">Song Playlist</h3>
+        {songPlaylist.length > 0 && <p>Total Songs : {songPlaylist.length}</p>}
         <div className="buttons">
           <button onClick={(): void => handleSongAdd(createRandomSong())} className="button is-link">
             + Add Song to Playlist
